@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON 对比 - JSON 工具</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsondiffpatch/dist/formatters-styles/html.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="top-nav">
+                <a href="index.html">格式化</a>
+                <a href="serialize.html">序列化/反序列化</a>
+                <a href="diff.html" class="active">对比</a>
+            </nav>
+            <h1>JSON 对比</h1>
+            <p class="subtitle">对比两个 JSON 并高亮差异</p>
+        </header>
+        <main>
+            <div class="diff-section">
+                <div class="diff-block">
+                    <h3>JSON 1</h3>
+                    <textarea id="json1" placeholder='输入第一个 JSON'></textarea>
+                </div>
+                <div class="diff-block">
+                    <h3>JSON 2</h3>
+                    <textarea id="json2" placeholder='输入第二个 JSON'></textarea>
+                </div>
+            </div>
+            <div class="diff-action">
+                <button id="diffBtn" class="primary-button">对比</button>
+            </div>
+            <div id="diffResult" class="diff-result-container">
+                <!-- 对比结果将渲染在此处 -->
+            </div>
+        </main>
+        <footer>
+            <p>© 2024 JSON 工具</p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jsondiffpatch/dist/jsondiffpatch.umd.min.js" defer></script>
+    <script src="diff.js" defer></script>
+</body>
+</html> 
