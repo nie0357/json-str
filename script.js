@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const hasItems = keys.length > 0;
 
             const toggle = document.createElement('span');
-            toggle.className = 'tree-toggle';
+            toggle.className = 'tree-toggle collapsed';
             if (!hasItems) toggle.style.visibility = 'hidden';
 
             const startBracket = document.createElement('span');
@@ -61,7 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const preview = document.createElement('span');
             preview.className = 'tree-preview';
             if (hasItems) {
-                preview.textContent = `...`;
+                preview.textContent = isArray
+                    ? ` // ${data.length} 项`
+                    : ` // ${Object.keys(data).length} 属性`;
             }
 
             itemDiv.appendChild(toggle);
@@ -78,13 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             let childrenRendered = false;
 
-            const expand = () => {
-                if (toggle.classList.contains('collapsed')) return;
-
-                preview.classList.add('collapsed');
+            function expand() {
+                toggle.classList.remove('collapsed');
                 childrenContainer.classList.remove('collapsed');
-                toggle.classList.add('collapsed');
-
+                preview.classList.add('collapsed');
                 if (!childrenRendered && hasItems) {
                     const fragment = document.createDocumentFragment();
                     const items = isArray ? data : Object.entries(data);
@@ -107,17 +106,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     childrenContainer.appendChild(fragment);
                     childrenRendered = true;
                 }
-            };
+            }
             
-            const collapse = () => {
-                preview.classList.remove('collapsed');
+            function collapse() {
+                toggle.classList.add('collapsed');
                 childrenContainer.classList.add('collapsed');
-                toggle.classList.remove('collapsed');
-            };
+                preview.classList.remove('collapsed');
+            }
 
             toggle.addEventListener('click', (e) => {
                 e.stopPropagation();
-                toggle.classList.toggle('collapsed');
                 if (toggle.classList.contains('collapsed')) {
                     expand();
                 } else {
